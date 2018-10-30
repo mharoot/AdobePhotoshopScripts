@@ -35,7 +35,7 @@ function extractColor3Hex(csv)
     var c3Index = c3.indexOf('#');
     if (c3Index < 0)
     {
-        alert("No Color 3 Found");
+        // alert("No Color 3 Found");
         return;
     }
     var color3 = c3.substring(c3Index+1, c3.length);

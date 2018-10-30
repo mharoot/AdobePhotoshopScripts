@@ -35,7 +35,7 @@ function extractColor2Hex(csv)
     var c2Index = c2.indexOf('#');
     if (c2Index < 0)
     {
-        alert("No Color 2 Found");
+        // alert("No Color 2 Found");
         return;
     }
     var color2 = c2.substring(c2Index+1, c2.length);

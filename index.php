@@ -70,9 +70,8 @@
           </table>
       </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
-    <script src="main-chunking-method.js"> </script>
-
+        <script src="main-chunking-method.js"> </script>
     </body>
 </html>

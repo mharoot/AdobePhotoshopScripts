@@ -107,7 +107,7 @@ function walkToPatternScale(lineItems, startIndex)
  */
 function resizeImage(width, height, resolution, resampleMethod, amount) 
 {
-    app.activeDocument.resizeImage(width, height, null, ResampleMethod.BICUBICSHARPER, null);
+    app.activeDocument.resizeImage(width, height, resolution, resampleMethod, amount);
 }
 
 /**

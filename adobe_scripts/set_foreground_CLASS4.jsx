@@ -16,10 +16,10 @@ function changeForegroundColor(color)
 }
 
 /**
- * Extracts the Hex from color 1
+ * Extracts the Hex from color 3
  * @param {String} csv path/to/filename.csv.
  */
-function extractColor1Hex(csv)
+function extractColor3Hex(csv)
 {
     // Extract data from the CSV
     var str = extractAsString(csv); 
@@ -27,23 +27,22 @@ function extractColor1Hex(csv)
     // Extract the Colors from the CSV
     var lines  = str.split("\n");
     lineItems  = lines[1].split(",");
-    var c1 = lineItems[52]; // color1
-    //var c2 = lineItems[53]; // color2
+
+    // color3 - may or may not exist
+    var c3 = lineItems[54]; 
     
-    var c1Index = c1.indexOf('#');
-    if (c1Index < 0)
+    // Extract the HEX Values only
+    var c3Index = c3.indexOf('#');
+    if (c3Index < 0)
     {
-        alert("There is a problem with the csv format coming from the meta items.  This is a logic bug and it is caused from poor csv structure.  Solution is to fix csv generator.");
+        // alert("No Color 3 Found");
         return;
     }
-    // Extract the HEX Values only
-    var color1 = c1.substring(c1Index+1, c1.length);
-    // var color2 = c2.substring(c2.indexOf('#')+1, c2.length);
+    var color3 = c3.substring(c3Index+1, c3.length);
 
-    //alert ("color1: #"+ color1 + " color2: #" + color2);
 
     var myColor = new SolidColor();  
-    myColor.rgb.hexValue=color1;
+    myColor.rgb.hexValue=color3;
     changeForegroundColor(myColor);
     
 
@@ -64,7 +63,7 @@ function extractAsString(csv) {
 }
 
 function run_script() {
-    extractColor1Hex('/Users/gpcolor/Desktop/MICHAEL/order_1.csv')
+    extractColor3Hex('/Users/gpcolor/Desktop/MICHAEL/order_1.csv')
 }
 
 run_script();

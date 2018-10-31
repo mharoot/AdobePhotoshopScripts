@@ -96,15 +96,42 @@ function walkToPatternScale(lineItems, startIndex)
 }
 
 /**
+ * Changes the size of the image.
+ * @param {UnitValue} width                 Use function UnitValue(scaleW, 'inch');
+ * @param {UnitValue} height                Use function UnitValue(scaleW, 'inch');
+ * @param {Int} resolution                  Resolution of the image.
+ * @param {ResampleMethod} resampleMethod   AUTOMATIC | BICUBIC | BICUBICAUTOMATIC | BICUBICSHARPER | 
+ *                                          BICUBICSHMOOTHER | BILINEAR | NEARSTNEIGHBOR | NONE | PRESERVEDETAILS
+ * @param {Int} amount                      The amount parameter controls the amount of noise value when using preserve details (Range: 0 - 100).
+ * @return {void}
+ */
+function resizeImage(width, height, resolution, resampleMethod, amount) 
+{
+    app.activeDocument.resizeImage(width, height, null, ResampleMethod.BICUBICSHARPER, null);
+}
+
+/**
  * Resizes the image using the Bi-Cubic Sharper Resample Method.
  * @param {Int} scalePercent patternScale number divided by 200.
  */
 function resizeImageToScale(scalePercent) {
-    var scaleW = app.activeDocument.width * scalePercent
-    var scaleH = app.activeDocument.height * scalePercent
-    // the height and width are tyed together so scaleH
-    app.activeDocument.resizeImage(UnitValue(scaleW, 'inch'), UnitValue(scaleH, 'inch'), null, ResampleMethod.BICUBICSHARPER);
+    // scaled width and height
+    var scaleW = app.activeDocument.width * scalePercent,
+        scaleH = app.activeDocument.height * scalePercent;
+    
+    // resizeImage parameters
+    var width  = UnitValue(scaleW, 'inch'),
+        height = UnitValue(scaleH, 'inch'),
+        resolution = null,
+        resampleMethod = ResampleMethod.BICUBICSHARPER,
+        amount = null;
+
+    // Changes the size of the image in photoshop
+    resizeImage(width, height, resolution, resampleMethod, amount);
+
+    
 }
+
 
 
 /**

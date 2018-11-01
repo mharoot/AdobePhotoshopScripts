@@ -11,7 +11,9 @@ function checkForErrors(lineItems)
 {
     var i = 0;
 
-    while (lineItems[i].indexOf("Wall Width") === -1 && i < lineItems.length) {
+    while ( i < lineItems.length) {
+        if (lineItems[i].indexOf("Wall Width") > 0 )
+            break;
         i++;
     }
 

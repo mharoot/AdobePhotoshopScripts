@@ -88,7 +88,7 @@ function walkToColor3(lineItems)
     // Walk to COLOR 3.
     var i = 0;
     while ( i < lineItems.length) {
-        if (lineItems[i].indexOf("COLOR 3=#") > 0 )
+        if (lineItems[i].indexOf("COLOR 3=#") >= 0 )
             break;
         i++;
     }

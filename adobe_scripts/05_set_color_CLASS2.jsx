@@ -69,8 +69,9 @@ function setClass2HexLayer(c) {
 function checkForErrors(lineItems)
 {
     var i = 0;
-
-    while (lineItems[i].indexOf("COLOR 1=#") === -1 && i < lineItems.length) {
+    while ( i < lineItems.length) {
+        if (lineItems[i].indexOf("COLOR 1=#") >= 0 )
+            break;
         i++;
     }
 

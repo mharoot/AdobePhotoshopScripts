@@ -1,30 +1,3 @@
-
-/**
- * Searches for the item_meta Wall Width property.  Alerts user of the script of the problem.
- * This function is used to walk to the Wall Width Property which is a mandatory data value.
- * It then spits out the index we should use to walk until we find what we are looking to extract.
- * @param {Array} lineItems the data value columns.
- * @return {Int} the index of the line items where I should begin my walk to extract additonal data. 
- *               a value of -1 means there is a problem with the CSV.
- */
-function checkForErrors(lineItems)
-{
-    var i = 0;
-
-    while (lineItems[i].indexOf("Wall Width") === -1 && i < lineItems.length) {
-        i++;
-    }
-
-    if (i === lineItems.length) {
-        alert("CSV PROBLEM: item_meta 'Wall Width' NOT found!")
-        return -1;
-    } else {
-        // alert("item_meta - Wall Width: position "+i)
-        return i;
-    }
-
-}
-
 /**
  * Extracts the csv file as a string
  * @param {String} csv path/to/filename.csv
@@ -53,14 +26,8 @@ function extractPatternScale(csv)
     var lines  = str.split("\n"); 
     lineItems  = lines[1].split(",");
 
-    // Check for errors and stop the script if Wall Width is missing
-    var startIndex = checkForErrors(lineItems);
-    if (startIndex === -1) {
-        alert('CANCELING SCRIPT EXECUTION');
-        return;
-    }
-
-    var patternScaleIndex = walkToPatternScale(lineItems, startIndex);
+    // Walk to pattern scale
+    var patternScaleIndex = walkToPatternScale(lineItems);
     
     var patternScale = lineItems[patternScaleIndex];
     patternScale = patternScale.substring(patternScale.indexOf('=')+1, patternScale.length);
@@ -73,16 +40,15 @@ function extractPatternScale(csv)
 /**
  * Walks along the lineItems until the 'Pattern Scale' string is found.
  * @param {Array} lineItems The col data values.
- * @param {Int} startIndex  Where the walk will start from.
  * @return The index of Pattern Scale or -1 if failed.
  */
-function walkToPatternScale(lineItems, startIndex)
+function walkToPatternScale(lineItems)
 {
-    var i = startIndex;
+    var i = 0;
     var find = 'PATTERN SCALE=';
-
-
-    while (lineItems[i].indexOf(find) === -1 && i < lineItems.length) {
+    while ( i < lineItems.length) {
+        if (lineItems[i].indexOf(find) >= 0 )
+            break;
         i++;
     }
 

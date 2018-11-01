@@ -65,7 +65,7 @@ function walkToColor2(lineItems)
     // Walk to COLOR 2.
     var i = 0;
     while ( i < lineItems.length) {
-        if (lineItems[i].indexOf("COLOR 2=#") > 0 )
+        if (lineItems[i].indexOf("COLOR 2=#") >= 0 )
             break;
         i++;
     }

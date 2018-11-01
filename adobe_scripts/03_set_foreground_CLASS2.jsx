@@ -10,54 +10,6 @@ function changeForegroundColor(color)
 }
 
 /**
- * Extracts the Hex from color 1
- * @param {String} csv path/to/filename.csv.
- */
-function extractColor1Hex(csv)
-{
-    // Extract the Color from the CSV
-    var color1 = getColor1Hex(csv);
-    var myColor = new SolidColor();  
-    myColor.rgb.hexValue=color1;
-    changeForegroundColor(myColor);
-}
-
-/**
- * Extracts the Hex from color 1
- * @param {String} csv path/to/filename.csv.
- * @return {String} Should there be no color 1 in csv then we return #808080 else we return the hex code.
- */
-function getColor1Hex(csv)
-{
-    // Extract data from the CSV
-    var str = extractAsString(csv); 
-
-    // Extract the Colors from the CSV
-    var lines  = str.split("\n");
-    lineItems  = lines[1].split(",");
-
-    
-
-    // color1 - MUST EXIST
-    var index = checkForErrors(lineItems);
-    var c1 = lineItems[index]; 
-    
-    // Extract the HEX Values only
-    var c1Index = c1.indexOf('#');
-    if (c1Index < 0)
-    {
-        alert("No Color 1 Found in CSV! Returning 808080");
-        return "808080";
-    } else {
-        // give color 1 hex
-        return c1.substring(c1Index+1, c1.length);
-    }
-    
-
-
-}
-
-/**
  * Searches for the item_meta COLOR 1 property.  Alerts user of the script of the problem.
  * This function is used to walk to the COLOR 1 Property which is a mandatory data value.
  * It then spits out the index we should use to walk until we find what we are looking to extract.
@@ -96,8 +48,64 @@ function extractAsString(csv) {
     return str;
 }
 
-function run_script() {
-    extractColor1Hex('/Users/gpcolor/Desktop/MICHAEL/order_1.csv')
+
+/**
+ * Extract the Hex Code from the csv file.   (color 1=CLASS2HEX layer in photoshop)
+ * @param {String} csv path/to/filename.csv.
+ * @return {String} Should there be no color 1 in csv 
+ *                  then we return #808080 && alert in photoshop of the Problem.
+ *                  else we return the hex code.
+ */
+function getColor1HexCode(csv)
+{
+    // Extract data from the CSV
+    var str = extractAsString(csv); 
+
+    // Extract the Colors from the CSV
+    var lines  = str.split("\n");
+    lineItems  = lines[1].split(",");
+    
+
+    // Extract index of 3 by walking to Color 1.  We are error checking
+    // here since it is a special case. Color 1 is mandatory.
+    var index = checkForErrors(lineItems);
+    var c1 = lineItems[index]; 
+    
+    // Extract the HEX Values only
+    var c1Index = c1.indexOf('#');
+    if (c1Index < 0)
+    {
+        alert("No Color 1 Found in CSV! Returning 808080");
+        return "808080";
+    } else {
+        // give color 1 hex
+        return c1.substring(c1Index+1, c1.length);
+    }
+    
 }
 
-run_script();
+
+
+/**
+ * 
+ * @param {String} csv path/to/filename.csv. 
+ */
+function run_script(csv) {
+    setColor1HexForeground(csv)
+}
+
+/**
+ * Extracts the Hex from color 1
+ * @param {String} csv path/to/filename.csv.
+ */
+function setColor1HexForeground(csv)
+{
+    // Extract the Color from the CSV
+    var color1 = getColor1HexCode(csv);
+    var myColor = new SolidColor();  
+    myColor.rgb.hexValue=color1;
+    changeForegroundColor(myColor);
+}
+
+// Script Entry Point
+run_script('/Users/gpcolor/Desktop/MICHAEL/order_1.csv');

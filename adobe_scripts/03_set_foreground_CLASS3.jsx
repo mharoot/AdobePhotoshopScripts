@@ -70,7 +70,7 @@ function run_script(csv) {
 function setColor2HexForeground(csv)
 {
     // Extract the Color from the CSV
-    var color2 = getColor2Hex(csv);
+    var color2 = getColor2HexCode(csv);
     var myColor = new SolidColor();  
     myColor.rgb.hexValue=color2;
     changeForegroundColor(myColor);

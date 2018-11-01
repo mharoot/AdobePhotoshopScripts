@@ -36,7 +36,7 @@ function getColor3HexCode(csv)
  * Sets the CLASS4HEX layer in photoshop to the Hex Code value color.
  * @param {String} c The Hex Code value of the color.
  */
-function setClass4Hex(c) {
+function setClass4HexLayer(c) {
     var Color = new SolidColor;
     var x = c.replace('#', '');
     Color.rgb.hexValue = x;
@@ -99,7 +99,7 @@ function run_script(csv)
     var hexCode = getColor3HexCode(csv);
 
     // set the CLASS4HEX layer in photoshop
-    setClass4Hex(hexCode);
+    setClass4HexLayer(hexCode);
     
 }
 

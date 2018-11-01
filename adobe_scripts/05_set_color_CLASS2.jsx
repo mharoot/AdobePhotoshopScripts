@@ -1,10 +1,12 @@
 
 /**
- * Extracts the Hex from color 1
+ * Extract the Hex Code from the csv file.   (color 1=CLASS2HEX layer in photoshop)
  * @param {String} csv path/to/filename.csv.
- * @return {String} Should there be no color 1 in csv then we return #808080 else we return the hex code.
+ * @return {String} Should there be no color 1 in csv 
+ *                  then we return #808080 && alert in photoshop of the Problem.
+ *                  else we return the hex code.
  */
-function getColor1Hex(csv)
+function getColor1HexCode(csv)
 {
     // Extract data from the CSV
     var str = extractAsString(csv); 
@@ -12,10 +14,10 @@ function getColor1Hex(csv)
     // Extract the Colors from the CSV
     var lines  = str.split("\n");
     lineItems  = lines[1].split(",");
-
     
 
-    // color1 - MUST EXIST
+    // Extract index of 3 by walking to Color 1.  We are error checking
+    // here since it is a special case. Color 1 is mandatory.
     var index = checkForErrors(lineItems);
     var c1 = lineItems[index]; 
     
@@ -33,10 +35,10 @@ function getColor1Hex(csv)
 }
 
 /**
- * CLASS2HEX layer has it's a color set to the value found in the CSV.
- * @param {String} c The hex value of the color.
+ * Sets the CLASS2HEX layer in photoshop to the Hex Code value color.
+ * @param {String} c The Hex Code value of the color.
  */
-function setClass2Hex(c) {
+function setClass2HexCode(c) {
     var Color = new SolidColor;
     var x = c.replace('#', '');
     Color.rgb.hexValue = x;
@@ -102,10 +104,10 @@ function extractAsString(csv) {
 function run_script(csv) 
 {
     // get the CLASS2HEX layer hex color code from csv file
-    var hex = getColor1Hex(csv);
+    var hex = getColor1HexCode(csv);
 
     // set the CLASS2HEX layer in photoshop
-    setClass2Hex(hex);
+    setClass2HexCode(hex);
 }
 
 run_script('/Users/gpcolor/Desktop/MICHAEL/order_1.csv');

@@ -1,10 +1,10 @@
 
 /**
- * Extracts the Hex from color 2
+ * Extract the Hex Code from the csv file.   (color 2=CLASS3HEX layer in photoshop)
  * @param {String} csv path/to/filename.csv.
- * @return {String} Should there be no color 2 in csv then we return #808080 else we return the hex code.
+ * @return {String} If no Hex Code for color 2 in csv then we return #808080 else we return the Hex Code.
  */
-function getColor2Hex(csv)
+function getColor2HexCode(csv)
 {
     // Extract data from the CSV
     var str = extractAsString(csv); 
@@ -14,7 +14,9 @@ function getColor2Hex(csv)
     lineItems  = lines[1].split(",");
    
     // color2 - MUST EXIST
-    var index = checkForErrors(lineItems);
+    var index = walkToColor2(lineItems);
+
+    // If there is no color 3 in csv then return no color
     if (index === -1) {
         return "808080";
     } else {
@@ -30,10 +32,10 @@ function getColor2Hex(csv)
 }
 
 /**
- * CLASS3HEX layer has it's a color set to the value found in the CSV.
+ * Sets the CLASS3HEX layer in photoshop to the Hex Code value color.
  * @param {String} c The hex value of the color.
  */
-function setClass3Hex(c) {
+function setClass3HexLayer(c) {
     var Color = new SolidColor;
     var x = c.replace('#', '');
     Color.rgb.hexValue = x;
@@ -54,24 +56,21 @@ function setClass3Hex(c) {
 }
 
 /**
- * Searches for the item_meta COLOR 2 property.  Alerts user of the script of the problem.
- * This function is used to walk to the COLOR 2 Property which is a mandatory data value.
- * It then spits out the index we should use to walk until we find what we are looking to extract.
+ * Searches for the index of item_meta COLOR 2 property.
  * @param {Array} lineItems the data value columns.
- * @return {Int} the index of the line items where I should begin my walk to extract additonal data. 
- *               a value of -1 means there is a problem with the CSV.
+ * @return {Int}  -1 means not found | greater than -1 is an index value
  */
-function checkForErrors(lineItems)
+function walkToColor2(lineItems)
 {
     // Walk to COLOR 2.
-        var i = 0;
+    var i = 0;
     while ( i < lineItems.length) {
         if (lineItems[i].indexOf("COLOR 2=#") > 0 )
             break;
         i++;
     }
 
-    // if No COLOR 2 found then return -1 else the hex code
+    // if No COLOR 2 found then return -1 else greater than -1
     return (i === lineItems.length) ? -1 : i;
 
 }
@@ -96,10 +95,10 @@ function extractAsString(csv) {
 function run_script(csv) 
 {
     // get the CLASS2HEX layer hex color code from csv file
-    var hex = getColor2Hex(csv);
+    var hex = getColor2HexCode(csv);
 
     // set the CLASS3HEX layer in photoshop
-    setClass3Hex(hex);
+    setClass3HexLayer(hex);
 }
 
 run_script('/Users/gpcolor/Desktop/MICHAEL/order_1.csv');

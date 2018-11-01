@@ -89,8 +89,11 @@ function extractAsString(csv) {
  */
 function run_script(csv) 
 {
-    var csvString = extractAsString(csv);
+    // get the CLASS4HEX layer hex color code from csv file
+    var hex = getColor3Hex(csv);
 
+    // set the CLASS4HEX layer in photoshop
+    setClass4Hex(hex);
     
 }
 

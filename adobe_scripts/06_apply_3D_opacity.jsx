@@ -1,7 +1,11 @@
 function apply3D(opacity) {
-    var DDD = app.activeDocument.layerSets[0].layerSets[0].layers.getByName('3D')
-    app.activeDocument.activeLayer = DDD;
-    DDD.opacity = opacity;
+    var _3D = app.activeDocument.layerSets[0].layerSets[0].layers.getByName('3D')
+    app.activeDocument.activeLayer = _3D;
+    _3D.opacity = opacity;
+
+    var _3d_intensity = app.activeDocument.layerSets[0].layerSets[0].layers.getByName('3d_intensity')
+    app.activeDocument.activeLayer = _3d_intensity;
+    _3d_intensity.opacity = opacity;
 }
 
 /**
@@ -33,10 +37,16 @@ function run_script(csv)
 
     // Extract Index of '3D Effect'
     var index = walkTo3D(lineItems);
-    var no_3D_effect = index === -1;
+    var no_3D_effect_item_meta_found = index === -1;
 
-    var opacity = (no_3D_effect) ? 0:33; // 33% when the 3D effect is on
-    apply3D(opacity);
+    if (no_3D_effect_item_meta_found) {
+        apply3D(0);
+    } else {
+        // see if '3D Effect' is on
+        var _3D_effect_on = lineItems[index].indexOf('On') >= 0;
+        _3D_effect_on ? apply3D(33) : apply3D(0);
+
+    }
 }
 
 

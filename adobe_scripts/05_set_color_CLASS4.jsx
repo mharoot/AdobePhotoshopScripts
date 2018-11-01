@@ -1,10 +1,10 @@
 
 /**
- * Extracts the Hex from color 3
+ * Extract the Hex Code from the csv file.   (color 3=CLASS4HEX layer in photoshop)
  * @param {String} csv path/to/filename.csv.
- * @return {String} Should there be no color 3 in csv then we return #808080 else we return the hex code.
+ * @return {String} If no Hex Code for color 3 in csv then we return #808080 else we return the Hex Code.
  */
-function getColor3Hex(csv)
+function getColor3HexCode(csv)
 {
     // Extract data from the CSV
     var str = extractAsString(csv); 
@@ -13,8 +13,10 @@ function getColor3Hex(csv)
     var lines  = str.split("\n"),
     lineItems  = lines[1].split(",");
    
-    // color2 - MUST EXIST
-    var index = checkForErrors(lineItems);
+    // Extract index of 3
+    var index = walkToColor3(lineItems);
+
+    // If there is no color 3 in csv then return no color
     if (index === -1) {
         return "808080";
     } else {
@@ -24,8 +26,8 @@ function getColor3Hex(csv)
         var c3Index = c3.indexOf('#');
 
         // return #808080 if there is no Color 3 Hex Code
-        var hex = (c3Index < 0) ? "808080": c3.substring(c3Index+1, c3.length);
-        return hex;
+        var hexCode = (c3Index < 0) ? "808080": c3.substring(c3Index+1, c3.length);
+        return hexCode;
     }
 
 }
@@ -55,14 +57,11 @@ function setClass4Hex(c) {
 }
 
 /**
- * Searches for the item_meta COLOR 3 property.  Alerts user of the script of the problem.
- * This function is used to walk to the COLOR 3 Property which is a OPTIONAL data value.
- * It then spits out the index we should use to walk until we find what we are looking to extract.
+ * Searches for the index of item_meta COLOR 3 property.
  * @param {Array} lineItems the data value columns.
- * @return {Int} the index of the line items where I should begin my walk to extract additonal data. 
- *               a value of -1 means there is a problem with the CSV.
+ * @return {Int}  -1 means not found | greater than -1 is an index value
  */
-function checkForErrors(lineItems)
+function walkToColor3(lineItems)
 {
     // Walk to COLOR 3.
     var i = 0;
@@ -72,7 +71,7 @@ function checkForErrors(lineItems)
         i++;
     }
 
-    // if No COLOR 3 found then return -1 else the hex code
+    // if No COLOR 3 found then return -1 else greater than -1
     return (i === lineItems.length) ? -1 : i;
 
 }
@@ -97,7 +96,7 @@ function extractAsString(csv) {
 function run_script(csv) 
 {
     // get the CLASS4HEX layer hex color code from csv file
-    var hex = getColor3Hex(csv);
+    var hex = getColor3HexCode(csv);
 
     // set the CLASS4HEX layer in photoshop
     setClass4Hex(hex);

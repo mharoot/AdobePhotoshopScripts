@@ -3,9 +3,10 @@ function apply3D(opacity) {
     app.activeDocument.activeLayer = _3D;
     _3D.opacity = opacity;
 
-    var _3d_intensity = app.activeDocument.layerSets[0].layerSets[0].layers.getByName('3d_intensity')
-    app.activeDocument.activeLayer = _3d_intensity;
-    _3d_intensity.opacity = opacity;
+    // Wes is supposed to delete this layer it's not supposed to bere.  Leave just in case.
+    // var _3d_intensity = app.activeDocument.layerSets[0].layerSets[0].layers.getByName('3d_intensity')
+    // app.activeDocument.activeLayer = _3d_intensity;
+    // _3d_intensity.opacity = opacity;
 }
 
 /**

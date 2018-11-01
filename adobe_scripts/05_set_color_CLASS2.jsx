@@ -38,7 +38,7 @@ function getColor1HexCode(csv)
  * Sets the CLASS2HEX layer in photoshop to the Hex Code value color.
  * @param {String} c The Hex Code value of the color.
  */
-function setClass2HexCode(c) {
+function setClass2HexLayer(c) {
     var Color = new SolidColor;
     var x = c.replace('#', '');
     Color.rgb.hexValue = x;
@@ -104,10 +104,10 @@ function extractAsString(csv) {
 function run_script(csv) 
 {
     // get the CLASS2HEX layer hex color code from csv file
-    var hex = getColor1HexCode(csv);
+    var hexCode = getColor1HexCode(csv);
 
     // set the CLASS2HEX layer in photoshop
-    setClass2HexCode(hex);
+    setClass2HexLayer(hexCode);
 }
 
 run_script('/Users/gpcolor/Desktop/MICHAEL/order_1.csv');

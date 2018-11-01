@@ -11,9 +11,7 @@ function checkForErrors(lineItems)
 {
     var i = 0;
 
-    while ( i < lineItems.length) {
-        if (lineItems[i].indexOf("Wall Width") > 0 )
-            break;
+    while (lineItems[i].indexOf("Wall Width") === -1 && i < lineItems.length) {
         i++;
     }
 
@@ -84,9 +82,7 @@ function walkToPatternScale(lineItems, startIndex)
     var find = 'PATTERN SCALE=';
 
 
-    while ( i < lineItems.length) {
-        if (lineItems[i].indexOf(find) > 0 )
-            break;
+    while (lineItems[i].indexOf(find) === -1 && i < lineItems.length) {
         i++;
     }
 

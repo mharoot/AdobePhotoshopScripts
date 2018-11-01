@@ -33,8 +33,8 @@ function getColor3HexCode(csv)
 }
 
 /**
- * CLASS4HEX gets a color set.
- * @param {String} c The hex value of the color.
+ * Sets the CLASS4HEX layer in photoshop to the Hex Code value color.
+ * @param {String} c The Hex Code value of the color.
  */
 function setClass4Hex(c) {
     var Color = new SolidColor;
@@ -96,10 +96,10 @@ function extractAsString(csv) {
 function run_script(csv) 
 {
     // get the CLASS4HEX layer hex color code from csv file
-    var hex = getColor3HexCode(csv);
+    var hexCode = getColor3HexCode(csv);
 
     // set the CLASS4HEX layer in photoshop
-    setClass4Hex(hex);
+    setClass4Hex(hexCode);
     
 }
 

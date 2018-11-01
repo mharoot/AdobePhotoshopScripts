@@ -30,8 +30,6 @@ function getColor1Hex(csv)
         return c1.substring(c1Index+1, c1.length);
     }
     
-
-
 }
 
 /**

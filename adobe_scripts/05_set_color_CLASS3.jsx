@@ -15,14 +15,18 @@ function getColor2Hex(csv)
    
     // color2 - MUST EXIST
     var index = checkForErrors(lineItems);
-    var c2 = lineItems[index]; 
-    
-    // Extract the HEX Values only
-    var c2Index = c2.indexOf('#');
+    if (index === -1) {
+        return "808080";
+    } else {
+        var c2 = lineItems[index]; 
+        
+        // Extract the HEX Values only
+        var c2Index = c2.indexOf('#');
 
-    // return #808080 if there is no Color 2 Hex Code
-    var hex = (c2Index < 0) ? "808080": c2.substring(c2Index+1, c2.length);
-    return hex;
+        // return #808080 if there is no Color 2 Hex Code
+        var hex = (c2Index < 0) ? "808080": c2.substring(c2Index+1, c2.length);
+        return hex;
+    }
 }
 
 /**
@@ -60,8 +64,10 @@ function setClass3Hex(c) {
 function checkForErrors(lineItems)
 {
     // Walk to COLOR 2.
-    var i = 0;
-    while (lineItems[i].indexOf("COLOR 2=#") === -1 && i < lineItems.length) {
+        var i = 0;
+    while ( i < lineItems.length) {
+        if (lineItems[i].indexOf("COLOR 2=#") > 0 )
+            break;
         i++;
     }
 

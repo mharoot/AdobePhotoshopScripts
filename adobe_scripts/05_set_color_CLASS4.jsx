@@ -10,19 +10,24 @@ function getColor3Hex(csv)
     var str = extractAsString(csv); 
     
     // Extract the Colors from the CSV
-    var lines  = str.split("\n");
+    var lines  = str.split("\n"),
     lineItems  = lines[1].split(",");
    
     // color2 - MUST EXIST
     var index = checkForErrors(lineItems);
-    var c3 = lineItems[index]; 
-    
-    // Extract the HEX Values only
-    var c3Index = c3.indexOf('#');
+    if (index === -1) {
+        return "808080";
+    } else {
+        var c3 = lineItems[index]; 
+        
+        // Extract the HEX Values only
+        var c3Index = c3.indexOf('#');
 
-    // return #808080 if there is no Color 3 Hex Code
-    var hex = (c3Index < 0) ? "808080": c3.substring(c3Index+1, c3.length);
-    return hex;
+        // return #808080 if there is no Color 3 Hex Code
+        var hex = (c3Index < 0) ? "808080": c3.substring(c3Index+1, c3.length);
+        return hex;
+    }
+
 }
 
 /**
@@ -61,11 +66,13 @@ function checkForErrors(lineItems)
 {
     // Walk to COLOR 3.
     var i = 0;
-    while (lineItems[i].indexOf("COLOR 3=#") === -1 && i < lineItems.length) {
+    while ( i < lineItems.length) {
+        if (lineItems[i].indexOf("COLOR 3=#") > 0 )
+            break;
         i++;
     }
 
-    // if No COLOR 2 found then return -1 else the hex code
+    // if No COLOR 3 found then return -1 else the hex code
     return (i === lineItems.length) ? -1 : i;
 
 }

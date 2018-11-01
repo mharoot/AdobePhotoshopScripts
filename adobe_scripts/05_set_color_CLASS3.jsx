@@ -16,7 +16,7 @@ function getColor2HexCode(csv)
     // color2 - MUST EXIST
     var index = walkToColor2(lineItems);
 
-    // If there is no color 3 in csv then return no color
+    // If there is no color 2 in csv then return no color
     if (index === -1) {
         return "808080";
     } else {
@@ -94,7 +94,7 @@ function extractAsString(csv) {
  */
 function run_script(csv) 
 {
-    // get the CLASS2HEX layer hex color code from csv file
+    // get the CLASS3HEX layer hex color code from csv file
     var hex = getColor2HexCode(csv);
 
     // set the CLASS3HEX layer in photoshop

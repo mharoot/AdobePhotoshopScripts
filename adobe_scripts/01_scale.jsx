@@ -82,7 +82,9 @@ function walkToPatternScale(lineItems, startIndex)
     var find = 'PATTERN SCALE=';
 
 
-    while (lineItems[i].indexOf(find) === -1 && i < lineItems.length) {
+    while ( i < lineItems.length) {
+        if (lineItems[i].indexOf(find) > 0 )
+            break;
         i++;
     }
 

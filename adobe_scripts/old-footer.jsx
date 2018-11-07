@@ -4,22 +4,29 @@
 (function start(){
     var order = loadJson();
     csv_order_swatch_names(order);
-    static_text(order);
+    csv_order_panelinfo(order);
 })();
 
 /**
- * Populates static_text from order.json.
+ * Populates csv_order_panelinfo from order.json.
  * @param {JSON} order 
  */
-function static_text(order)
+function csv_order_panelinfo(order)
 {
-    var layers = app.activeDocument.layers.getByName('static_text').layers;
-    
-    // BLANK
-    layers[0].textItem.contents = "WHAT GOES INTO BLANK LAYER?"
-    // NOTES
-    layers[1].textItem.contents = "THESE ARE THE ITEM's NOTES.  Blah blah blah.  This is cool.";
+    var layers = app.activeDocument.layers.getByName('csv_order_panelinfo').layers;
+    // substrate info was placed in here...
+    var index = str.indexOf('Commercial Type');
+    // _substrate
+    layers[0].textItem.contents = str.substring(index, str.length);
+    // _total_panel_height
+    layers[1].textItem.contents = str.substring(index, str.length);
+    // _total_panel_width
 
+    // _this_panel_width
+
+    // _total_panel_count
+
+    // _panel_number
 
 }
 

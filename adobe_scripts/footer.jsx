@@ -4,7 +4,7 @@
 (function start(){
     var csv_order_swatch_names = app.activeDocument.layers.getByName('csv_order_swatch_names').layers;
     // alert( csv_order_swatch_names );
-    fillFooter(csv_order_swatch_names);
+    fillClass2Through4(csv_order_swatch_names);
 })();
 
 
@@ -23,7 +23,7 @@ function loadJson() {
  * csv_order_swatch_names 
  * @param {ArtLayer} layers 
  */
-function fillFooter(layers) {
+function fillClass2Through4(layers) {
     var order = loadJson();
     layers[1].textItem.contents = order["item_meta"]["COLOR 1"];
     layers[2].textItem.contents = order["item_meta"]["COLOR 2"];

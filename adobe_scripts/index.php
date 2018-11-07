@@ -1,4 +1,7 @@
 <script>
+// RUNNING MY SIDE TESTS IN THIS FILE
+// php -S localhost:8081 -f index.php
+
 var order = {"_id":"5b2202b28a8bfd1d1b650ba1",
 "order_id":"1",
 "status":"generating",

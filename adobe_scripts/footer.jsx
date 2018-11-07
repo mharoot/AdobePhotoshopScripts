@@ -14,13 +14,10 @@
 function static_text(order)
 {
     var layers = app.activeDocument.layers.getByName('static_text').layers;
-    
     // BLANK
     layers[0].textItem.contents = "WHAT GOES INTO BLANK LAYER?"
     // NOTES
     layers[1].textItem.contents = "THESE ARE THE ITEM's NOTES.  Blah blah blah.  This is cool.";
-
-
 }
 
 // load JSON function

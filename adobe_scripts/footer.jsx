@@ -2,11 +2,33 @@
 
 
 (function start(){
-    var csv_order_swatch_names = app.activeDocument.layers.getByName('csv_order_swatch_names').layers;
-    // alert( csv_order_swatch_names );
-    fillClass2Through4(csv_order_swatch_names);
+    var order = loadJson();
+    csv_order_swatch_names(order);
+    csv_order_panelinfo(order);
 })();
 
+/**
+ * Populates csv_order_panelinfo from order.json.
+ * @param {JSON} order 
+ */
+function csv_order_panelinfo(order)
+{
+    var layers = app.activeDocument.layers.getByName('csv_order_panelinfo').layers;
+    // substrate info was placed in here...
+    var index = str.indexOf('Commercial Type');
+    // _substrate
+    layers[0].textItem.contents = str.substring(index, str.length);
+    // _total_panel_height
+    layers[1].textItem.contents = str.substring(index, str.length);
+    // _total_panel_width
+
+    // _this_panel_width
+
+    // _total_panel_count
+
+    // _panel_number
+
+}
 
 // load JSON function
 function loadJson() {
@@ -20,20 +42,44 @@ function loadJson() {
 }
 
 /**
- * csv_order_swatch_names 
- * @param {ArtLayer} layers 
+ * Populates csv_order_swatch_names from order.json.
+ * @param {JSON} order 
  */
-function fillClass2Through4(layers) {
-    var order = loadJson();
+function csv_order_swatch_names(order) {
+    var layers = app.activeDocument.layers.getByName('csv_order_swatch_names').layers;
     layers[1].textItem.contents = order["item_meta"]["COLOR 1"];
     layers[2].textItem.contents = order["item_meta"]["COLOR 2"];
     layers[3].textItem.contents = order["item_meta"]["COLOR 3"];
-
-    // for (var i = 1; i < layers.length; i++) {
-    //     layers[i].textItem.contents = ;
-    // }
 }
 
+
+/*
+{"_id":"5b2202b28a8bfd1d1b650ba1",
+"order_id":"1",
+"status":"generating",
+"billing_phone":"310-980-6482",
+"shipping_first_name":"Amr",
+"shipping_last_name":"Saemaldahr",
+"shipping_address":"6400 Crescent Park East",
+"shipping_postcode":"90094",
+"shipping_city":"Playa Vista",
+"shipping_state":"CA",
+"shipping_country":"US",
+"shipping_company":"self",
+"ited_id":"200",
+"item_name":"3C_ASD166992632 - Commercial Type II",
+"item_meta":{
+    "Wall Height":"5",
+    "Wall Width":"5",
+    "PATTERN SCALE":"100",
+    "Texture Effect":"woodgrain",
+    "3D Effect":"On",
+    "Aging Effect":"Lived-in",
+    "COLOR 3":"#83a530",
+    "COLOR 2":"#af6b46",
+    "COLOR 1":"#c9a566"}
+}
+*/
 
 
 

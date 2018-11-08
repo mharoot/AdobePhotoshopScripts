@@ -8,8 +8,8 @@ var static_TX_texture_aging_dir = '/Users/gpcolor/Desktop/digitaldecor-backend/b
     var order = loadJson();
     var textureEffect = order["item_meta"]["Texture Effect"];
     
-    var texture_virtual_psd_file = expect_open_correct_TX(textureEffect);
-    app.open(texture_virtual_psd_file);
+    var TX_virtual_psd_file = expect_open_correct_TX(textureEffect);
+    app.open(TX_virtual_psd_file);
 
 })();
 
@@ -20,12 +20,12 @@ var static_TX_texture_aging_dir = '/Users/gpcolor/Desktop/digitaldecor-backend/b
  */
 function expect_open_correct_TX(textureEffect)
 {
-    var texture_virtual_psd;
+    var TX_virtual_psd;
 
     switch(jsUcfirst(textureEffect))
     {
         case "Inert":
-            texture_virtual_psd = File(static_TX_texture_aging_dir+"/inert/TX_INERT_virtual.psd");
+            TX_virtual_psd = File(static_TX_texture_aging_dir+"/inert/TX_INERT_virtual.psd");
             break;
         case "Linen":
             alert(textureEffect);
@@ -40,19 +40,19 @@ function expect_open_correct_TX(textureEffect)
             alert(textureEffect);
             break;
         case "Woodgrain": 
-            texture_virtual_psd = File(static_TX_texture_aging_dir+"/woodgrain/TX_WOODGRAIN_virtual.psd");
+            TX_virtual_psd = File(static_TX_texture_aging_dir+"/woodgrain/TX_WOODGRAIN_virtual.psd");
         break;
         default:
             alert("Default: " +textureEffect);
     }
 
-    return texture_virtual_psd;
+    return TX_virtual_psd;
 }
 
 // load JSON function
 function loadJson() {
     var script = new File($.fileName).toString();
-    var json_path = script.split('expect_open_correct_TX.jsx').shift() + 'order.json'
+    var json_path = script.split('022_expect_open_correct_TX.jsx').shift() + 'order.json'
     var jsonFile = new File(json_path);
     jsonFile.open('r');
     var str = jsonFile.read();

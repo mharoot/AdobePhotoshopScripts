@@ -3,9 +3,7 @@
     var order = loadJson();
     var color1 = order["item_meta"]["COLOR 1"];
     color1 = color1.substring(1, color1.length)
-    var color = new SolidColor();  
-    color.rgb.hexValue=color1;
-    setClass2HexLayer(color);
+    setClass2HexLayer(color1);
 })();
 
 

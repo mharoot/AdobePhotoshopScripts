@@ -1,11 +1,11 @@
 #include "json2.js" 
 (function start(){
     var order = loadJson();
-    var color1 = order["item_meta"]["COLOR 3"];
-    color1 = color1.substring(1, color1.length)
+    var color3 = order["item_meta"]["COLOR 3"];
+    color3 = color3.substring(1, color3.length)
     var color = new SolidColor();  
-    color.rgb.hexValue=color1;
-    setClass2HexLayer(color);
+    color.rgb.hexValue=color3;
+    setClass4HexLayer(color);
 })();
 
 
@@ -22,17 +22,17 @@ function loadJson() {
 
 
 /**
- * Sets the CLASS2HEX layer in photoshop to the Hex Code value color.
+ * Sets the CLASS4HEX layer in photoshop to the Hex Code value color.
  * @param {String} c The Hex Code value of the color.
  */
-function setClass2HexLayer(c) {
+function setClass4HexLayer(c) {
     var Color = new SolidColor;
     var x = c.replace('#', '');
     Color.rgb.hexValue = x;
    
     // if you open up photoshop, the file is sitting in a folder that is 3 directories deep.
     // hence why layerSets[0] is repeated 3 times in order,  ( layerSets[0] = 1st subfolder )
-    var PTL = app.activeDocument.layerSets[0].layerSets[0].layerSets[0].layers.getByName('CLASS2HEX');
+    var PTL = app.activeDocument.layerSets[0].layerSets[0].layerSets[0].layers.getByName('CLASS4HEX');
     
     // set this layer as the selected active layer (simulates clicking on the CLASS4HEX layer)
     app.activeDocument.activeLayer = PTL;

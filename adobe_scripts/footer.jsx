@@ -4,7 +4,7 @@
 (function start(){
     var order = loadJson();
     csv_order_swatch_names(order);
-    static_text(order);
+    // static_text(order); not in use...
     csv_order_infoCopy(order);
     
 })();

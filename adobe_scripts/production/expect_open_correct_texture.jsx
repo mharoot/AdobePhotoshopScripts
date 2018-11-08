@@ -1,7 +1,47 @@
 #include "json2.js" 
+
+
 (function start(){
+    var dir = '/Users/gpcolor/Desktop/digitaldecor-backend/bin/static_TX_texture_aging';
     var order = loadJson();
+    var textureEffect = order["item_meta"]["Texture Effect"];
 })();
+
+/**
+ * Finds the correct file to for the texture effect.
+ * @param {String} textureEffect 
+ * @return {File} The `texture_virtual.psd` file.
+ */
+function expect_open_correct_texture(textureEffect)
+{
+    var texture_virtual_psd;
+
+    switch(jsUcfirst(textureEffect))
+    {
+        case "Inert":
+            texture_virtual_psd = File(dir+"/inert/texture_INERT_virtual.psd");
+            break;
+        case "Linen":
+            alert(textureEffect);
+            break;
+        case "Papyrus":
+            alert(textureEffect);
+            break;
+        case "Rockwork":
+            alert(textureEffect);
+        break;
+        case "Stucco":
+            alert(textureEffect);
+            break;
+        case "Woodgrain": 
+            texture_virtual_psd = File(dir+"/woodgrain/texture_WOODGRAIN_virtual.psd");
+        break;
+        default:
+            alert("Default: " +textureEffect);
+    }
+
+    return texture_virtual_psd;
+}
 
 // load JSON function
 function loadJson() {
@@ -12,4 +52,10 @@ function loadJson() {
     var str = jsonFile.read();
     jsonFile.close();
     return JSON.parse(str);
+}
+
+
+function jsUcfirst(string) 
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }

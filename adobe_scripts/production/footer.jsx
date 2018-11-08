@@ -1,11 +1,9 @@
 #include "json2.js" 
-
-
 (function start(){
     var order = loadJson();
     csv_order_swatch_names(order);
     // static_text(order); not in use...
-    csv_order_infoCopy(order);
+    csv_order_info(order);
     
 })();
 
@@ -34,32 +32,56 @@ function loadJson() {
 }
 
 
-function csv_order_infoCopy(order)
+function csv_order_info(order)
 {
-    var layers = app.activeDocument.layers.getByName('csv_order_info copy').layers;
+    var layers = app.activeDocument.layers.getByName('csv_order_info').layers;
     //_order_info_footer
     layers[0].textItem.contents = "this is where _order_info_footer is supposed to be";
     //_order_info_gpcopy
     layers[1].textItem.contents = generateOrderInfoString(order);
 }
 
+/**
+ * Generates order_id with the following information
+ * 1. order number - we can not let ppl count it he doesn't like that it shows 1
+ * 2. pattern name
+ * 3. Colors: class2,class3,class4
+ * 4. Scale: is it a 100 it it a 120 Pattern Scale
+ * 5. 3D: on or off
+ * 6. Texture: if any utilized
+ * 7. order width and order height in inches
+ * @param {JSON} order 
+ */
 function generateOrderInfoString(order)
 {
-    var tab = '    ';
-    var orderInfo = '"order_id:" ' + order["order_id"] + tab +
-                     '"item_name:" ' + order["item_name"] + tab +
-                     '"item_meta": ' +
-                     JSON.stringify({
-                        "Wall Height" : "5",
-                        "Wall Width" : "5",
-                        "PATTERN SCALE" : "100",
-                        "Texture Effect" : "woodgrain",
-                        "3D Effect" : "On",
-                        "Aging Effect" : "Lived-in",
-                        "COLOR 3" : "#83a530",
-                        "COLOR 2" : "#af6b46",
-                        "COLOR 1" : "#c9a566"});
-                    
+    // order number
+    var orderNumber = order["_id"]; // the mongodb id as the order
+    // pattern name
+    var itemName = order["item_name"];
+    var n = itemName.indexOf(' - '); // "3C_ASD166992632 - Commercial Type II",
+    var patternName = itemName.substring(0, n); // 3C_ASD166992632 
+    // colors
+    var class2 = order["item_meta"]["COLOR 1"],
+        class3 = order["item_meta"]["COLOR 2"],
+        class4 = order["item_meta"]["COLOR 3"];
+    // scale
+    var patternScale = order["item_meta"]["PATTERN SCALE"];
+    // 3D
+    var _3D = order["item_meta"]["3D Effect"];
+    // texture
+    var textureEffect = order["item_meta"]["Texture Effect"];
+    // order width and height in inches
+    var w = order["item_meta"]["Wall Width"]*12,
+        h = order["item_meta"]["Wall Height"]*12;
+    // order info 
+    var orderInfo = "Order Number: " + orderNumber + "; " +
+                    "Pattern Name: " + orderNumber + "; " +
+                    "Colors: " + class2 + ", " + class3 + ", " + class4 + "; " +
+                    "3D Effect: " + _3D + "; " +
+                    "Texture: " + textureEffect + "; " +
+                    "Width" + w + "''; " +
+                    "Height" + h + "''; ";
+
     return orderInfo;
 }
 
@@ -76,7 +98,12 @@ function csv_order_swatch_names(order) {
 
 
 /*
-{"_id":"5b2202b28a8bfd1d1b650ba1",
+
+
+{
+"art_by":"Amr Saemaldahr",
+"print_by":"Michael Harootoonyan",
+"_id":"5b2202b28a8bfd1d1b650ba1",
 "order_id":"1",
 "status":"generating",
 "billing_phone":"310-980-6482",
@@ -102,7 +129,3 @@ function csv_order_swatch_names(order) {
     "COLOR 1":"#c9a566"}
 }
 */
-
-
-
-

@@ -1,10 +1,16 @@
 #include "json2.js" 
 
 
+var static_TX_texture_aging_dir = '/Users/gpcolor/Desktop/digitaldecor-backend/bin/static_TX_texture_aging';
+
+
 (function start(){
-    var dir = '/Users/gpcolor/Desktop/digitaldecor-backend/bin/static_TX_texture_aging';
     var order = loadJson();
     var textureEffect = order["item_meta"]["Texture Effect"];
+    
+    var texture_virtual_psd_file = expect_open_correct_texture(textureEffect);
+    app.open(texture_virtual_psd_file);
+
 })();
 
 /**
@@ -19,7 +25,7 @@ function expect_open_correct_texture(textureEffect)
     switch(jsUcfirst(textureEffect))
     {
         case "Inert":
-            texture_virtual_psd = File(dir+"/inert/texture_INERT_virtual.psd");
+            texture_virtual_psd = File(static_TX_texture_aging_dir+"/inert/texture_INERT_virtual.psd");
             break;
         case "Linen":
             alert(textureEffect);
@@ -34,7 +40,7 @@ function expect_open_correct_texture(textureEffect)
             alert(textureEffect);
             break;
         case "Woodgrain": 
-            texture_virtual_psd = File(dir+"/woodgrain/texture_WOODGRAIN_virtual.psd");
+            texture_virtual_psd = File(static_TX_texture_aging_dir+"/woodgrain/texture_WOODGRAIN_virtual.psd");
         break;
         default:
             alert("Default: " +textureEffect);

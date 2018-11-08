@@ -5,6 +5,8 @@
     var order = loadJson();
     csv_order_swatch_names(order);
     static_text(order);
+    csv_order_infoCopy(order);
+    
 })();
 
 /**
@@ -29,6 +31,36 @@ function loadJson() {
     var str = jsonFile.read();
     jsonFile.close();
     return JSON.parse(str);
+}
+
+
+function csv_order_infoCopy(order)
+{
+    var layers = app.activeDocument.layers.getByName('csv_order_info copy').layers;
+    //_order_info_footer
+    layers[0].textItem.contents = "this is where _order_info_footer is supposed to be";
+    //_order_info_gpcopy
+    layers[1].textItem.contents = generateOrderInfoString(order);
+}
+
+function generateOrderInfoString(order)
+{
+    var tab = '    ';
+    var orderInfo = '"order_id:" ' + order["order_id"] + tab +
+                     '"item_name:" ' + order["item_name"] + tab +
+                     '"item_meta": ' +
+                     JSON.stringify({
+                        "Wall Height" : "5",
+                        "Wall Width" : "5",
+                        "PATTERN SCALE" : "100",
+                        "Texture Effect" : "woodgrain",
+                        "3D Effect" : "On",
+                        "Aging Effect" : "Lived-in",
+                        "COLOR 3" : "#83a530",
+                        "COLOR 2" : "#af6b46",
+                        "COLOR 1" : "#c9a566"});
+                    
+    return orderInfo;
 }
 
 /**

@@ -80,8 +80,8 @@ function generateOrderInfoString(order)
                     "Scale: " + patternScale + "; " +
                     "3D Effect: " + _3D + "; " +
                     "Texture: " + textureEffect + "; " +
-                    "Width: " + w + "´´; " + // Alt e = ´
-                    "Height: " + h + "´´;";
+                    "Width: " + w + "in; " + // Alt e = ´
+                    "Height: " + h + "in;";
 
     return orderInfo;
 }

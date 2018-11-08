@@ -75,12 +75,13 @@ function generateOrderInfoString(order)
         h = order["item_meta"]["Wall Height"]*12;
     // order info 
     var orderInfo = "Order Number: " + orderNumber + "; " +
-                    "Pattern Name: " + orderNumber + "; " +
+                    "Pattern Name: " + patternName + "; " +
                     "Colors: " + class2 + ", " + class3 + ", " + class4 + "; " +
+                    "Scale: " + patternScale + "; " +
                     "3D Effect: " + _3D + "; " +
                     "Texture: " + textureEffect + "; " +
-                    "Width" + w + "''; " +
-                    "Height" + h + "''; ";
+                    "Width" + w + "″; " +
+                    "Height" + h + "″; ";
 
     return orderInfo;
 }

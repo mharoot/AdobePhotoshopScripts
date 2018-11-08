@@ -11,7 +11,7 @@
 // load JSON function
 function loadJson() {
     var script = new File($.fileName).toString();
-    var json_path = script.split('01_scale.jsx').shift() + 'order.json'
+    var json_path = script.split('02_canvas_size_to_order.jsx').shift() + 'order.json'
     var jsonFile = new File(json_path);
     jsonFile.open('r');
     var str = jsonFile.read();

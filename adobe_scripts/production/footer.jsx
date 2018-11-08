@@ -55,7 +55,7 @@ function csv_order_info(order)
 function generateOrderInfoString(order)
 {
     // order number
-    var orderNumber = order["_id"]; // the mongodb id as the order
+    var orderNumber = order["_id"].substring(0,6); // the first 6 characters in mongodb id as the order 5b2202b28a8bfd1d1b650ba1
     // pattern name
     var itemName = order["item_name"];
     var n = itemName.indexOf(' - '); // "3C_ASD166992632 - Commercial Type II",
@@ -74,14 +74,14 @@ function generateOrderInfoString(order)
     var w = order["item_meta"]["Wall Width"]*12,
         h = order["item_meta"]["Wall Height"]*12;
     // order info 
-    var orderInfo = "Order Number: " + orderNumber + "; " +
-                    "Pattern Name: " + patternName + "; " +
-                    "Colors: " + class2 + ", " + class3 + ", " + class4 + "; " +
-                    "Scale: " + patternScale + "; " +
-                    "3D Effect: " + _3D + "; " +
-                    "Texture: " + textureEffect + "; " +
-                    "Width: " + w + "in; " + // Alt e = ´
-                    "Height: " + h + "in;";
+    var orderInfo = "Order Number: " + orderNumber + " | " +
+                    "Pattern Name: " + patternName + " | " +
+                    "Colors: " + class2 + ", " + class3 + ", " + class4 + " | " +
+                    "Scale: " + patternScale + " | " +
+                    "3D Effect: " + _3D + " | " +
+                    "Texture: " + jsUcfirst(textureEffect) + " | " +
+                    "Order Width: " + w + "in | " + // Alt e = ´
+                    "Order Height: " + h + "in";
 
     return orderInfo;
 }
@@ -95,6 +95,12 @@ function csv_order_swatch_names(order) {
     layers[1].textItem.contents = order["item_meta"]["COLOR 1"];
     layers[2].textItem.contents = order["item_meta"]["COLOR 2"];
     layers[3].textItem.contents = order["item_meta"]["COLOR 3"];
+}
+
+
+function jsUcfirst(string) 
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 

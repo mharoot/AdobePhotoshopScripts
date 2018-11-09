@@ -30,13 +30,12 @@ function loadJson() {
 function openArtBy(artist)
 {
     var artBy = "artby_" + artist + "_virtual.psd";
-    var file;
     try {
         file = new File(source_logos+artBy); 
+        app.open(file);
     } catch (e)
     {
         file = new File(source_logos+"artby_digitaldecor_virtual.psd")
+        app.open(file);
     }
-
-    app.open(file);
 }

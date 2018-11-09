@@ -4,7 +4,7 @@
 // load JSON function
 function loadJson() {
     var script = new File($.fileName).toString();
-    var json_path = script.split('082_expect_open_printby_virtual.jsx').shift() + 'order.json'
+    var json_path = script.split('083_expect_open_pattern_qrcode.jsx').shift() + 'order.json'
     var jsonFile = new File(json_path);
     jsonFile.open('r');
     var str = jsonFile.read();

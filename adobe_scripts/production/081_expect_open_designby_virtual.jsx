@@ -15,6 +15,25 @@ var dir = '/Users/gpcolor/Desktop/digitaldecor-backend';
 
 (function start(){
     var order = loadJson();
-    // TODO
+    openDesignBy(order["design_by"]);
 })();
 
+
+/**
+ * Opens the designBy file in Adobe Photoshop.
+ * @param {String} designer if file is not found designer is digitaldecor.
+ * @return {void} 
+ */
+function openDesignBy(designer)
+{
+    var designBy = "designby_" + designer + "_virtual.psd";
+    var file;
+    try {
+        file = new File(source_logos+designBy); 
+    } catch (e)
+    {
+        file = new File(source_logos+"designby_digitaldecor_virtual.psd")
+    }
+
+    app.open(file);
+}
